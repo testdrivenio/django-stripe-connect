@@ -1,0 +1,20 @@
+{% extends '_base.html' %}
+
+{% block title %}Courses{% endblock %}
+
+{% block content %}
+  <h1 class="title is-size-1">Courses</h1>
+  <hr><br>
+  {% if course_list %}
+    {% for course in course_list %}
+      <h4 class="title is-size-4">{{ course.title }}</h4>
+      <p>{{ course.description }}</p>
+      <br>
+      <p><a href="{% url 'course_detail' course.slug %}" class="button is-info">Purchase</a></p>
+      <br><br><br>
+    {% endfor %}
+  {% else %}
+    <p>No courses!</p>
+  {% endif %}
+
+{% endblock %}

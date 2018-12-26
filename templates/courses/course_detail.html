@@ -1,0 +1,83 @@
+{% extends '_base.html' %}
+
+{% block title %}Purchase{% endblock %}
+
+{% block content %}
+
+  <div>
+    <h1 class="title is-size-1">Purchase</h1>
+    <hr><br>
+    <!-- notifications -->
+    <div class="notification-success-wrapper" style="display: none">
+      <div class="notification is-success"></div><br>
+    </div>
+    <div class="notification-danger-wrapper" style="display: none">
+      <div class="notification is-danger"></div><br>
+    </div>
+    <h4 class="title is-size-4">You are buying:</h4>
+    <p>Course Title: <em>{{ course.title }}</em></p>
+    <p>Amount: <em>${{ course.price }}</em></p>
+  </div>
+  <br>
+  <div>
+    <h4 class="title is-size-4">Use this info for testing:</h4>
+    <p>Card Number: <em>4242 4242 4242 4242</em></p>
+    <p>CVC Code: <em>any three digits</em></p>
+    <p>Expiration: <em>any date in the future</em></p>
+  </div>
+  <br>
+  <br>
+  <button id="purchase-btn" class="button is-info">Pay ${{ course.price }} with Card</button>
+
+{% endblock %}
+
+{% block script %}
+  <script>var generated_csrf_token = '{{ csrf_token }}';</script>
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+  <script>
+    $(() => {
+      var handler = StripeCheckout.configure({
+        key: '{{ key }}',
+        locale: 'auto',
+        token: function(token) {
+          $('.notification-success-wrapper').css('display', 'none');
+          $('.notification-danger-wrapper').css('display', 'none');
+          $.ajax({
+            url: '/courses/charge/',
+            method: 'POST',
+            data: JSON.stringify({
+              token: token.id,
+              amount: "{{ course.price }}" * 100,
+              description: "{{ course.title }}",
+              course_id: "{{ course.id }}",
+            }),
+            headers: {'X-CSRFToken': generated_csrf_token},
+          })
+          .done((res) => {
+            const message = 'Thanks for purchasing!'
+            $('div > .notification.is-success').html(message);
+            $('.notification-success-wrapper').css('display', 'block');
+          })
+          .fail((err) => {
+            const message = 'There was a problem processing your payment. Please use a different payment method or contact your payment method provider.<br><br>Please contact us if you continue to have problems.'
+            $('div > .notification.is-danger').html(message);
+            $('.notification-danger-wrapper').css('display', 'block');
+          });
+        }
+      });
+      document.getElementById('purchase-btn').addEventListener('click', function(e) {
+        // Open Checkout with further options:
+        handler.open({
+          name: "Purchase a course",
+          description: "{{ user.email }}",
+          amount: "{{ course.price }}" * 100
+        });
+        e.preventDefault();
+      });
+      // Close Checkout on page navigation:
+      window.addEventListener('popstate', function() {
+        handler.close();
+      });
+    });
+  </script>
+{% endblock %}

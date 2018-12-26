@@ -1,0 +1,34 @@
+[
+  {
+    "model": "users.customuser",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$120000$iX9Fe25N4Xt6$hx7nQ3OwRVr08b02U+D2+Ibc6YtmhGzmWPA8DimFV4c=",
+      "last_login": null,
+      "is_superuser": false,
+      "email": "test@buyer.com",
+      "date_joined": "2018-12-12T16:27:33.903Z",
+      "is_staff": false,
+      "is_active": true,
+      "is_seller": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.customuser",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$120000$iX9Fe25N4Xt6$hx7nQ3OwRVr08b02U+D2+Ibc6YtmhGzmWPA8DimFV4c=",
+      "last_login": null,
+      "is_superuser": false,
+      "email": "test@seller.com",
+      "date_joined": "2018-12-12T16:27:33.903Z",
+      "is_staff": false,
+      "is_active": true,
+      "is_seller": true,
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]

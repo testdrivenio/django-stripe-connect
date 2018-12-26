@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
+    <title>Django Stripe Connect - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'bulma.min.css' %}">
+  </head>
+  <body>
+    {% include 'nav.html' %}
+    <br><br>
+    <section class="container">
+      <div class="column is-two-thirds">
+        {% block content %}{% endblock %}
+      </div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    {% block script %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,18 @@
+{% extends '_base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+  <h1 class="title is-size-1">Django Stripe Connect</h1>
+  <hr><br>
+  {% if user.is_authenticated %}
+    <p class="is-size-6">Welcome, {{ user.email }}!</p>
+    <br>
+    {% if user.is_seller %}
+      <a class="button is-info">Connect Stripe Account</a>
+    {% endif %}
+    <a href="{% url 'course_list' %}" class="button is-primary">Purchase a Course</a>
+  {% else %}
+    <p class="is-size-6">Please <a href="{% url 'login' %}">log in</a>.</p>
+  {% endif %}
+{% endblock %}

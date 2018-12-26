@@ -1,0 +1,28 @@
+{% extends '_base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+  <h1 class="title is-size-1">Login</h1>
+  <hr><br>
+  <form method="post">
+    {% csrf_token %}
+    <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input class="input" name="username" type="email" placeholder="e.g. alexsmith@gmail.com">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Password</label>
+        <div class="control">
+          <input class="input" name="password" type="password" placeholder="Password">
+        </div>
+      </div>
+      <div class="field">
+      <p class="control">
+        <button type="submit" class="button is-success">Submit</button>
+      </p>
+    </div>
+  </form>
+{% endblock %}
