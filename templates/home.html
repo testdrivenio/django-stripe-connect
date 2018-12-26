@@ -8,8 +8,8 @@
   {% if user.is_authenticated %}
     <p class="is-size-6">Welcome, {{ user.email }}!</p>
     <br>
-    {% if user.is_seller %}
-      <a class="button is-info">Connect Stripe Account</a>
+    {% if user.is_seller and not user.seller.stripe_user_id %}
+      <a href="{% url 'authorize' %}" class="button is-info">Connect Stripe Account</a>
     {% endif %}
     <a href="{% url 'course_list' %}" class="button is-primary">Purchase a Course</a>
   {% else %}

@@ -9,6 +9,7 @@ name = "pypi"
 
 django = "==2.1"
 stripe = "==2.17.0"
+requests = "==2.21.0"
 
 
 [dev-packages]

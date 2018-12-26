@@ -133,3 +133,4 @@ LOGOUT_REDIRECT_URL ='home'
 
 STRIPE_PUBLISHABLE_KEY = '<your test publishable key here>'
 STRIPE_SECRET_KEY = '<your test secret key here>'
+STRIPE_CONNECT_CLIENT_ID = '<your test connect client id here>'
